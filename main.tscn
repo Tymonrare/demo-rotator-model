@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://m7QiQ.png" type="Texture" id=1]
+[ext_resource path="res://RefRotator.tscn" type="PackedScene" id=1]
+[ext_resource path="res://m7QiQ.png" type="Texture" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -10,114 +11,6 @@ subdivide_height = 0
 subdivide_depth = 0
 
 [sub_resource type="SpatialMaterial" id=2]
-
-render_priority = 0
-flags_transparent = false
-flags_unshaded = false
-flags_vertex_lighting = false
-flags_no_depth_test = false
-flags_use_point_size = false
-flags_world_triplanar = false
-flags_fixed_size = false
-flags_albedo_tex_force_srgb = false
-vertex_color_use_as_albedo = false
-vertex_color_is_srgb = false
-params_diffuse_mode = 0
-params_specular_mode = 0
-params_blend_mode = 0
-params_cull_mode = 0
-params_depth_draw_mode = 0
-params_line_width = 1.0
-params_point_size = 1.0
-params_billboard_mode = 0
-params_grow = false
-params_use_alpha_scissor = false
-albedo_color = Color( 1, 1, 1, 1 )
-metallic = 0.7
-metallic_specular = 0.5
-metallic_texture_channel = 0
-roughness = 0.3
-roughness_texture_channel = 0
-emission_enabled = false
-normal_enabled = false
-rim_enabled = false
-clearcoat_enabled = false
-anisotropy_enabled = false
-ao_enabled = false
-depth_enabled = false
-subsurf_scatter_enabled = false
-transmission_enabled = false
-refraction_enabled = false
-detail_enabled = false
-uv1_scale = Vector3( 1, 1, 1 )
-uv1_offset = Vector3( 0, 0, 0 )
-uv1_triplanar = false
-uv1_triplanar_sharpness = 1.0
-uv2_scale = Vector3( 1, 1, 1 )
-uv2_offset = Vector3( 0, 0, 0 )
-uv2_triplanar = false
-uv2_triplanar_sharpness = 1.0
-proximity_fade_enable = false
-distance_fade_enable = false
-_sections_unfolded = [ "Metallic", "Roughness" ]
-
-[sub_resource type="GDScript" id=3]
-
-script/source = "extends MeshInstance
-
-# class member variables go here, for example:
-# var a = 2
-# var b = \"textvar\"
-
-var rot = Vector3(0,0,0);
-var IP_SERVER = \"127.0.0.1\"
-var PORT_SEND = 5187
-var PORT_LISTEN = 5188
-var socketUDP = PacketPeerUDP.new()
-
-func _ready():
-	pass
-
-func rotate():
-	self.rotation = rot*PI*2;
-	var arr = StreamPeerBuffer.new();
-	arr.put_float(rot.x);
-	arr.put_float(rot.y);
-	arr.put_float(rot.z);
-	
-	socketUDP.set_dest_address(IP_SERVER, PORT_SEND)
-	socketUDP.put_packet(arr.data_array);
-	pass;
-
-func _on_roll_value_changed(value):
-	rot.z = value;
-	pass # replace with function body
-
-
-func _on_pitch_value_changed(value):
-	rot.x = value;
-	pass # replace with function body
-
-
-func _on_yaw_value_changed(value):
-	rot.y = value;
-	pass # replace with function body
-
-
-func _on_SendTimer_timeout():
-	rotate();
-	pass # replace with function body
-"
-
-[sub_resource type="PrismMesh" id=4]
-
-left_to_right = 0.5
-size = Vector3( 2, 2, 2 )
-subdivide_width = 7
-subdivide_height = 0
-subdivide_depth = 0
-
-[sub_resource type="SpatialMaterial" id=5]
 
 render_priority = 0
 flags_transparent = true
@@ -170,7 +63,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Flags", "Parameters", "Roughness" ]
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=3]
 
 script/source = "extends MeshInstance
 
@@ -209,7 +102,15 @@ func _process(delta):
 		rotation.y = arr.get_float(); #yaw
 "
 
-[sub_resource type="ProceduralSky" id=7]
+[sub_resource type="PrismMesh" id=4]
+
+left_to_right = 0.5
+size = Vector3( 2, 2, 2 )
+subdivide_width = 7
+subdivide_height = 0
+subdivide_depth = 0
+
+[sub_resource type="ProceduralSky" id=5]
 
 radiance_size = 4
 sky_top_color = Color( 0.0684814, 0.342586, 0.730469, 1 )
@@ -230,10 +131,10 @@ sun_energy = 16.0
 texture_size = 2
 _sections_unfolded = [ "Ground", "Sky", "Sun", "Texture" ]
 
-[sub_resource type="Environment" id=8]
+[sub_resource type="Environment" id=6]
 
 background_mode = 2
-background_sky = SubResource( 7 )
+background_sky = SubResource( 5 )
 background_sky_custom_fov = 0.0
 background_color = Color( 0, 0, 0, 1 )
 background_energy = 1.78
@@ -310,11 +211,11 @@ adjustment_contrast = 1.0
 adjustment_saturation = 1.0
 _sections_unfolded = [ "Auto Exposure", "Background", "SSAO" ]
 
-[sub_resource type="QuadMesh" id=9]
+[sub_resource type="QuadMesh" id=7]
 
 size = Vector2( 5, 5 )
 
-[sub_resource type="SpatialMaterial" id=10]
+[sub_resource type="SpatialMaterial" id=8]
 
 render_priority = 0
 flags_transparent = false
@@ -353,7 +254,7 @@ depth_enabled = false
 subsurf_scatter_enabled = false
 transmission_enabled = true
 transmission = Color( 0, 1, 0.742188, 1 )
-transmission_texture = ExtResource( 1 )
+transmission_texture = ExtResource( 2 )
 refraction_enabled = false
 detail_enabled = false
 uv1_scale = Vector3( 1, 1, 1 )
@@ -368,7 +269,7 @@ proximity_fade_enable = false
 distance_fade_enable = false
 _sections_unfolded = [ "Albedo", "Transmission" ]
 
-[node name="Spatial" type="Spatial" index="0"]
+[node name="Spatial" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="." index="0"]
 
@@ -566,7 +467,9 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="RefRotator" type="MeshInstance" parent="." index="1"]
+[node name="RefRotator" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="RefRotator2" type="MeshInstance" parent="." index="2"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31837, 0 )
 layers = 1
@@ -584,7 +487,7 @@ material/0 = SubResource( 2 )
 script = SubResource( 3 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="RefRotator" index="0"]
+[node name="MeshInstance" type="MeshInstance" parent="RefRotator2" index="0"]
 
 transform = Transform( 0.499566, 0, 0, 0, -1.75219e-08, -0.499316, 0, 0.244966, -1.3338e-08, 0, 0, 0.992498 )
 layers = 1
@@ -601,51 +504,9 @@ skeleton = NodePath("..")
 material/0 = SubResource( 2 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="SendTimer" type="Timer" parent="RefRotator" index="1"]
-
-process_mode = 1
-wait_time = 0.01
-one_shot = false
-autostart = true
-
-[node name="RefRotator2" type="MeshInstance" parent="." index="2"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31837, 0 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 1 )
-skeleton = NodePath("..")
-material/0 = SubResource( 5 )
-script = SubResource( 6 )
-_sections_unfolded = [ "Transform", "material" ]
-
-[node name="MeshInstance" type="MeshInstance" parent="RefRotator2" index="0"]
-
-transform = Transform( 0.499566, 0, 0, 0, -1.75219e-08, -0.499316, 0, 0.244966, -1.3338e-08, 0, 0, 0.992498 )
-layers = 1
-material_override = null
-cast_shadow = 1
-extra_cull_margin = 0.0
-use_in_baked_light = false
-lod_min_distance = 0.0
-lod_min_hysteresis = 0.0
-lod_max_distance = 0.0
-lod_max_hysteresis = 0.0
-mesh = SubResource( 4 )
-skeleton = NodePath("..")
-material/0 = SubResource( 5 )
-_sections_unfolded = [ "Transform", "material" ]
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="3"]
 
-environment = SubResource( 8 )
+environment = SubResource( 6 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="." index="4"]
 
@@ -659,9 +520,9 @@ lod_min_distance = 0.0
 lod_min_hysteresis = 0.0
 lod_max_distance = 0.0
 lod_max_hysteresis = 0.0
-mesh = SubResource( 9 )
+mesh = SubResource( 7 )
 skeleton = NodePath("..")
-material/0 = SubResource( 10 )
+material/0 = SubResource( 8 )
 _sections_unfolded = [ "material" ]
 
 [node name="OmniLight" type="OmniLight" parent="." index="5"]
@@ -692,7 +553,5 @@ _sections_unfolded = [ "Light", "Omni", "Shadow", "Transform" ]
 [connection signal="value_changed" from="Camera/Control/VBoxContainer/HSlider2" to="RefRotator" method="_on_pitch_value_changed"]
 
 [connection signal="value_changed" from="Camera/Control/VBoxContainer/HSlider3" to="RefRotator" method="_on_yaw_value_changed"]
-
-[connection signal="timeout" from="RefRotator/SendTimer" to="RefRotator" method="_on_SendTimer_timeout"]
 
 
