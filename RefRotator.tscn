@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -132,13 +132,51 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 32.3, 33.5, 34.2, 35.1, 36.7, 38.7, 39.8, 40.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 12.3, 13.5, 14.9, 20.1, 23.5, 32.3, 33.5, 34.2, 35.1, 35.6, 39.2, 40.1, 40.8, 41.6, 42.6, 43.3, 43.9, 45.2, 46.4, 46.9, 47.5, 49, 49.7, 50, 50.5, 52.5, 53.4, 55.4, 57.7, 58.8, 59.6, 60.6, 61.8, 62.7, 64.5, 67.6, 70.3, 71.1, 71.8, 72.4, 73.4, 74.5, 75.3, 76.1, 76.9, 81.3, 82.3, 83.5, 84.3, 87.6, 90.3, 91.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 58.7746, 0, 0 ), Vector3( 15.4394, 0, 0 ), Vector3( -15.6127, 0, 0 ), Vector3( -17.9515, -7.45979, 23.0173 ), Vector3( 0.656726, 6.80776, -19.7446 ), Vector3( -7.74083, 0, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( -10.0025, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 8.3522 ), Vector3( 0, 0, 0 ), Vector3( 58.7746, 0, 0 ), Vector3( 15.4394, 0, 0 ), Vector3( -15.6127, 0, 0 ), Vector3( -17.9515, -7.45979, 23.0173 ), Vector3( 16.7401, -3.49558, 32.6111 ), Vector3( 0.656726, 6.80776, -19.7446 ), Vector3( -7.74083, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 29.2145, 0, 0 ), Vector3( -2.30332, 0, 0 ), Vector3( -2.30332, 0, 0 ), Vector3( -34.3541, 0, 0 ), Vector3( -34.3541, 0, 0 ), Vector3( -8.01155, -12.5678, 22.173 ), Vector3( 0, 0, 0 ), Vector3( 32.8461, 0, 0 ), Vector3( 44.8473, -1.91251, -19.0142 ), Vector3( -5.63022, 0, 9.0709 ), Vector3( -44.4297, 0, 0 ), Vector3( -42.5818, -14.1059, 20.374 ), Vector3( 0, 0, 0 ), Vector3( -23.0975, 0, 0 ), Vector3( -22.0497, -7.05619, 18.2484 ), Vector3( -6.02774, -8.27446, 30.3095 ), Vector3( 0, 0, 0 ), Vector3( 15.8492, -5.00563, -22.418 ), Vector3( -10.6976, 3.25646, -17.0411 ), Vector3( -8.43976, 7.35414, -41.3272 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 48.5957, 0, 0 ), Vector3( 48.3652, 4.01459, -21.8382 ), Vector3( -5.28094, -9.60481, 4.9405 ), Vector3( -31.041, -11.1812, 9.86799 ), Vector3( 0, 0, 0 ), Vector3( 30.1728, 0, 0 ), Vector3( 35.2968, 3.80893, 18.7316 ), Vector3( -16.9065, -1.22333, 22.7579 ), Vector3( -16.9065, -1.22333, 22.7579 ), Vector3( -11.3988, 1.85492, -9.30608 ), Vector3( -27.9994, 7.25484, -36.7317 ), Vector3( 10.249, 1.86907, 10.393 ), Vector3( -25.201, -0.585086, 28.3009 ), Vector3( 16.8771, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="Animation" id=6]
+
+resource_name = "360demo-2"
+length = 183.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 6.7, 10.5, 16.5, 18.6, 22.9, 23.7, 24.7, 28.1, 28.8, 32.5, 38.8, 40.6, 44.9, 49.8, 52.2, 54.5, 55.7, 61.1, 63.7, 68.4, 71.1, 75.4, 82.6, 90.2, 97.4, 100.1, 102.7, 103.9, 104.6, 107, 109, 111.4, 113.6, 114.5, 115.2, 117.4, 119.3, 122.4, 125.5, 126.6, 127.7, 130.5, 132, 133.5, 138.4, 139.6, 141.7, 145.6, 147.5, 152.9, 158.3, 159.9, 163.4, 169.8, 171.7, 174.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 5.30762 ), Vector3( 0, 0, 19.1489 ), Vector3( 0, 0, 3.57497 ), Vector3( -6.31609, -5.12232e-08, -6.84963 ), Vector3( 0, 0, -17.5179 ), Vector3( 0, 0, -17.5179 ), Vector3( 0, 0, 12.5016 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 34.4631, 0, 0 ), Vector3( -11.7946, -9.17039, -35.4163 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 41.5995, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -24.9859 ), Vector3( 0, 0, 0 ), Vector3( -36.8582, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 25.898, -6.91197e-07, -21.3545 ), Vector3( -22.0943, -11.4825, 20.5804 ), Vector3( 0, 0, 0 ), Vector3( 31.9647, -19.3404, -33.5441 ), Vector3( -20.7783, -10.756, 28.1685 ), Vector3( 36.7582, 26.9861, 40.3949 ), Vector3( 0, 0, 0 ), Vector3( -22.4973, -11.879, 28.799 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 37.2032, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( -36.9611, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 50.9787 ), Vector3( 15.8991, -37.7059, 40.6827 ), Vector3( 13.8727, -11.6602, -29.0914 ), Vector3( -6.40552, 3.10822, -18.5436 ), Vector3( -38.5456, 1.98411, -10.4216 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 38.2532, 0, 0 ), Vector3( 1.5607, 0, 0 ), Vector3( 0.529433, -0.573283, -47.2785 ), Vector3( 0, 0, 0 ), Vector3( 1.5607, 0, 0 ), Vector3( 48.1277, 0, 0 ), Vector3( 5.66153, -5.60225, -44.8366 ), Vector3( -15.441, -1.3463, -8.96673 ), Vector3( 0, 0, 0 ), Vector3( 0.625625, 0.46642, 36.7067 ), Vector3( 1.5607, 0, 0 ), Vector3( 1.0463, 1.15809, 47.9085 ), Vector3( 0.704404, -1.39273, -63.1761 ), Vector3( 0, 0, 0 ), Vector3( -33.0294, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+
+resource_name = "360demo-5"
+length = 105.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 8.3, 9.5, 11.1, 12.5, 13.5, 14.3, 15.1, 16, 17.1, 17.5, 30.9, 39.2, 41.3, 44.2, 45.9, 48.6, 51.2, 52.7, 53.5, 54.6, 55.4, 56.8, 59, 61.2, 63.1, 65.2, 67.7, 71.1, 72.3, 74.1, 75.3, 76.5, 78.2, 78.9, 81.7, 83.3, 84.6, 87.3, 88.4, 89.4, 90.5, 91.2, 92, 93.4, 93.9, 94.6, 95.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 17.5829 ), Vector3( 0, 0, 8.78686 ), Vector3( 0, 0, 31.4308 ), Vector3( 0, 0, 9.35798 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -24.6281 ), Vector3( 0, 0, 0 ), Vector3( -14.5302, 0, 0 ), Vector3( 36.2714, 0, 0 ), Vector3( -14.8518, 0, 0 ), Vector3( -13.5067, -6.23446, 25.0671 ), Vector3( -25.6152, -9.92912, 40.7374 ), Vector3( 0, 0, 0 ), Vector3( 12.0113, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 31.1923, 0, 0 ), Vector3( -17.7438, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 11.9399, 0, 0 ), Vector3( 10.1962, 6.24587, 31.7269 ), Vector3( -8.09304, 2.18194, 9.9681 ), Vector3( 14.8873, 0, 0 ), Vector3( 40.0159, 0, 0 ), Vector3( -4.87086, 0, 0 ), Vector3( -4.87086, 0, 0 ), Vector3( 0, 0, -30.5375 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 30.7915 ), Vector3( 8.96781, 0, 0 ), Vector3( -23.0136, 0, 0 ), Vector3( -2.74281, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -24.0729 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 24.061 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( -27.9882, 0, 0 ), Vector3( 12.2677, 0, 0 ), Vector3( 3.44402, 0, 0 ), Vector3( -19.9883, 0, 0 ), Vector3( 17.152, 0, 0 ), Vector3( 3.41375, 0, 0 ) ]
+}
+
+[sub_resource type="GDScript" id=8]
 
 script/source = "extends AnimationPlayer
 
@@ -166,7 +204,7 @@ func _ready():
 
 [node name="RefRotator" type="MeshInstance" index="0"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31837, 0 )
+transform = Transform( 0.999999, 0, 0, 0, 0.999998, 0, 0, 0, 0.999999, 0, 1.31837, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -181,7 +219,7 @@ skeleton = NodePath("..")
 material/0 = SubResource( 2 )
 script = SubResource( 3 )
 _sections_unfolded = [ "Transform", "material" ]
-shakeIntense = null
+shakeIntense = 0.0
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="0"]
 
@@ -215,8 +253,10 @@ playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/360demo-1 = SubResource( 5 )
+anims/360demo-2 = SubResource( 6 )
+anims/360demo-5 = SubResource( 7 )
 blend_times = [  ]
-script = SubResource( 6 )
+script = SubResource( 8 )
 
 [connection signal="timeout" from="SendTimer" to="." method="_on_SendTimer_timeout"]
 
