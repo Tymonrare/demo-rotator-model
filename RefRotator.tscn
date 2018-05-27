@@ -1,0 +1,223 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+
+size = Vector3( 1, 1, 1.5 )
+subdivide_width = 0
+subdivide_height = 0
+subdivide_depth = 0
+
+[sub_resource type="SpatialMaterial" id=2]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+metallic = 0.7
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.3
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Metallic", "Roughness" ]
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends MeshInstance
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+var rot = Vector3(0,0,0);
+var IP_SERVER = \"127.0.0.1\"
+var PORT_SEND = 5187
+var PORT_LISTEN = 5188
+var socketUDP = PacketPeerUDP.new()
+
+export(float, 0, 1, 0.1) var shakeIntense
+
+func _ready():
+	pass
+
+func rotate_send():
+	var arr = StreamPeerBuffer.new();
+	arr.put_float(self.rotation.x);
+	arr.put_float(self.rotation.y);
+	arr.put_float(self.rotation.z);
+	
+	socketUDP.set_dest_address(IP_SERVER, PORT_SEND)
+	socketUDP.put_packet(arr.data_array);
+	pass;
+
+func _on_roll_value_changed(value):
+	rot.z = value;
+	self.rotation = rot*PI*2;	
+	pass # replace with function body
+
+
+func _on_pitch_value_changed(value):
+	rot.x = value;
+	self.rotation = rot*PI*2;	
+	pass # replace with function body
+
+
+func _on_yaw_value_changed(value):
+	rot.y = value;
+	self.rotation = rot*PI*2;	
+	pass # replace with function body
+
+
+func _on_SendTimer_timeout():
+	rotate_send();
+	pass # replace with function body
+"
+
+[sub_resource type="PrismMesh" id=4]
+
+left_to_right = 0.5
+size = Vector3( 2, 2, 2 )
+subdivide_width = 7
+subdivide_height = 0
+subdivide_depth = 0
+
+[sub_resource type="Animation" id=5]
+
+resource_name = "360demo-1"
+length = 116.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 32.3, 33.5, 34.2, 35.1, 36.7, 38.7, 39.8, 40.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 58.7746, 0, 0 ), Vector3( 15.4394, 0, 0 ), Vector3( -15.6127, 0, 0 ), Vector3( -17.9515, -7.45979, 23.0173 ), Vector3( 0.656726, 6.80776, -19.7446 ), Vector3( -7.74083, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="GDScript" id=6]
+
+script/source = "extends AnimationPlayer
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	var args = OS.get_cmdline_args();
+
+	if(args.size() > 1 && has_animation(args[1])):
+		play(args[1]);
+		print(\"play animation: \" + args[1]);
+		
+	if(args.size() > 1 && int(args[2])):
+		seek(float(args[2])/1000);
+
+
+
+#func _process(delta):
+#	# Called every frame. Delta is time since last frame.
+#	# Update game logic here.
+#	pass
+"
+
+[node name="RefRotator" type="MeshInstance" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31837, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 1 )
+skeleton = NodePath("..")
+material/0 = SubResource( 2 )
+script = SubResource( 3 )
+_sections_unfolded = [ "Transform", "material" ]
+shakeIntense = null
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="0"]
+
+transform = Transform( 0.499566, 0, 0, 0, -1.75219e-08, -0.499316, 0, 0.244966, -1.3338e-08, 0, 0, 0.992498 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 4 )
+skeleton = NodePath("..")
+material/0 = SubResource( 2 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="SendTimer" type="Timer" parent="." index="1"]
+
+process_mode = 1
+wait_time = 0.01
+one_shot = false
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/360demo-1 = SubResource( 5 )
+blend_times = [  ]
+script = SubResource( 6 )
+
+[connection signal="timeout" from="SendTimer" to="." method="_on_SendTimer_timeout"]
+
+
