@@ -73,21 +73,26 @@ var PORT_SEND = 5187
 var PORT_LISTEN = 5188
 var socketUDP = PacketPeerUDP.new()
 
-var custom_bytes_values = [false, false, false, false, false, false, false];
-
 export(float, 0, 1, 0.1) var shakeIntense
+export(bool) var wind
+export(bool) var rain
 
 func _ready():
 	pass
 
 func rotate_send():
 	var arr = StreamPeerBuffer.new();
-	arr.put_float(self.rotation.x);
-	arr.put_float(self.rotation.y);
-	arr.put_float(self.rotation.z);
 	
-	for i in custom_bytes_values:
-		arr.put_var(i);
+	# Ref rotation + randomize shake intense
+	arr.put_float(self.rotation.x + (randf()*30-60)*shakeIntense);
+	arr.put_float(self.rotation.y + (randf()*30-60)*shakeIntense);
+	arr.put_float(self.rotation.z + (randf()*30-60)*shakeIntense);
+	
+	# 5D platform effects
+	var bytes = PoolByteArray();
+	bytes.append(wind);
+	bytes.append(rain);
+	arr.put_partial_data(bytes);
 	
 	socketUDP.set_dest_address(IP_SERVER, PORT_SEND)
 	socketUDP.put_packet(arr.data_array);
@@ -113,13 +118,7 @@ func _on_yaw_value_changed(value):
 
 func _on_SendTimer_timeout():
 	rotate_send();
-	pass # replace with function body
-
-
-func byte_button_toggled(pressed, which):
-	custom_bytes_values[int(which.text)] = pressed;
-	pass # replace with function body
-"
+	pass # replace with function body"
 
 [sub_resource type="PrismMesh" id=4]
 
@@ -146,6 +145,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( -10.0025, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 8.3522 ), Vector3( 0, 0, 0 ), Vector3( 58.7746, 0, 0 ), Vector3( 15.4394, 0, 0 ), Vector3( -15.6127, 0, 0 ), Vector3( -17.9515, -7.45979, 23.0173 ), Vector3( 16.7401, -3.49558, 32.6111 ), Vector3( 0.656726, 6.80776, -19.7446 ), Vector3( -7.74083, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 29.2145, 0, 0 ), Vector3( -2.30332, 0, 0 ), Vector3( -2.30332, 0, 0 ), Vector3( -34.3541, 0, 0 ), Vector3( -34.3541, 0, 0 ), Vector3( -8.01155, -12.5678, 22.173 ), Vector3( 0, 0, 0 ), Vector3( 32.8461, 0, 0 ), Vector3( 44.8473, -1.91251, -19.0142 ), Vector3( -5.63022, 0, 9.0709 ), Vector3( -44.4297, 0, 0 ), Vector3( -42.5818, -14.1059, 20.374 ), Vector3( 0, 0, 0 ), Vector3( -23.0975, 0, 0 ), Vector3( -22.0497, -7.05619, 18.2484 ), Vector3( -6.02774, -8.27446, 30.3095 ), Vector3( 0, 0, 0 ), Vector3( 15.8492, -5.00563, -22.418 ), Vector3( -10.6976, 3.25646, -17.0411 ), Vector3( -8.43976, 7.35414, -41.3272 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 48.5957, 0, 0 ), Vector3( 48.3652, 4.01459, -21.8382 ), Vector3( -5.28094, -9.60481, 4.9405 ), Vector3( -31.041, -11.1812, 9.86799 ), Vector3( 0, 0, 0 ), Vector3( 30.1728, 0, 0 ), Vector3( 35.2968, 3.80893, 18.7316 ), Vector3( -16.9065, -1.22333, 22.7579 ), Vector3( -16.9065, -1.22333, 22.7579 ), Vector3( -11.3988, 1.85492, -9.30608 ), Vector3( -27.9994, 7.25484, -36.7317 ), Vector3( 10.249, 1.86907, 10.393 ), Vector3( -25.201, -0.585086, 28.3009 ), Vector3( 16.8771, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:wind")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 19.3, 19.8, 20 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, false ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -230,6 +241,8 @@ material/0 = SubResource( 2 )
 script = SubResource( 3 )
 _sections_unfolded = [ "Transform", "material" ]
 shakeIntense = 0.0
+wind = false
+rain = false
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="0"]
 
