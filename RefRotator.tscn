@@ -73,6 +73,8 @@ var PORT_SEND = 5187
 var PORT_LISTEN = 5188
 var socketUDP = PacketPeerUDP.new()
 
+var custom_bytes_values = [false, false, false, false, false, false, false];
+
 export(float, 0, 1, 0.1) var shakeIntense
 
 func _ready():
@@ -83,6 +85,9 @@ func rotate_send():
 	arr.put_float(self.rotation.x);
 	arr.put_float(self.rotation.y);
 	arr.put_float(self.rotation.z);
+	
+	for i in custom_bytes_values:
+		arr.put_var(i);
 	
 	socketUDP.set_dest_address(IP_SERVER, PORT_SEND)
 	socketUDP.put_packet(arr.data_array);
@@ -108,6 +113,11 @@ func _on_yaw_value_changed(value):
 
 func _on_SendTimer_timeout():
 	rotate_send();
+	pass # replace with function body
+
+
+func byte_button_toggled(pressed, which):
+	custom_bytes_values[int(which.text)] = pressed;
 	pass # replace with function body
 "
 
@@ -241,7 +251,7 @@ _sections_unfolded = [ "Transform", "material" ]
 [node name="SendTimer" type="Timer" parent="." index="1"]
 
 process_mode = 1
-wait_time = 0.01
+wait_time = 0.05
 one_shot = false
 autostart = true
 
